@@ -63,18 +63,56 @@ export async function onSignUp(prevState: FormState, data: FormData): Promise<{ 
  }
 }
 
+export async function onLogIn(prevState: FormState, data: FormData): Promise<{ message: string }> {
+  console.log("ACTIVATED LOGIN")
+  const username = data.get("username")?.toString() ?? '';
+  const password = data.get("password")?.toString() ?? '';
 
+  console.log(username);
+  console.log(password);
 
-
-export async function login(formData: FormData) {
-  const user = { 
-    username: formData.get("username"), 
-    password: formData.get("password") 
+  const requestOptions: RequestInit = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'accept': 'application/json'
+    },
+    body: new URLSearchParams({
+      'username': username,
+      'password': password,
+      'grant_type': '',
+      'scope': '',
+      'client_id': '',
+      'client_secret': ''
+    }).toString()
   };
+  
+  try {
+    const response = await fetch(`http://localhost:8000/account/login`, requestOptions);
+    const responseData = await response.json();
 
-  const jwt = ""; // TODO: get the jwt from the backend server based on the logged in user
+    if (response.status === 200) {
+      // Successfully logged in
+      const jwt = responseData.access_token;
+      cookies().set("cupidai-session", jwt, { httpOnly: true });
+    } else if (response.status === 401 || response.status === 404) {
+      // User already exists
+      throw new Error(responseData.detail);
+    } else {
+      // Handle other error cases
+      throw new Error(response.statusText);
+    }
+  } catch (error: any) {
+    // Handle network errors or other exceptions
+    console.error('Error signing up:', error.message);
 
-  cookies().set("cupidai-session", jwt, { httpOnly: true });
+    return {
+      message: error.message
+   }
+  }
+  return {
+    message: 'success'
+ }
 }
 
 export async function logout() {

@@ -35,7 +35,7 @@ const page = () => {
   const [showConfirmPassword, setShowConfirmPassword] = useState<boolean>(false);
 
   const checkInputs = () => {
-    return password.length >= 8 && confirmPass === password && email.length >= 0
+    return password.length >= 8 && confirmPass === password && email.length >= 0 && username.length >= 0;
   }
 
   useEffect(() => {
@@ -210,7 +210,7 @@ const page = () => {
         <Card width="full">
           <div className="flex flex-col">
             <span className="text-[32px] font-bold leading-[36px]">
-              Sign Up
+              Sign up
             </span>
             <p className="text-textd">
               Sign up for free to gain access to any of our products.
@@ -295,7 +295,7 @@ const page = () => {
                 Sign up
               </PrimaryBoxButton>
             </div>
-            <SecondaryBoxButton href="/login">Login</SecondaryBoxButton>
+            <SecondaryBoxButton href="/login">Log in</SecondaryBoxButton>
           </div>
         </Card>
       </form>

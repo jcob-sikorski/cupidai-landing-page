@@ -1,42 +1,45 @@
 "use client";
 
+import React, { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import Image from "next/image";
 import { motion } from "framer-motion";
-import React, { useState } from "react";
+import { Card, ChildCard } from "../components/Cards";
+import { Divider } from "../components/Divider";
+import { TextInput, PasswordInput } from "../components/TextInput";
 import {
-  IconButton,
   PrimaryBoxButton,
   SecondaryBoxButton,
   TertiaryButton,
 } from "../components/Buttons";
-import { Card, ChildCard } from "../components/Cards";
-import Checkbox from "../components/Checkbox";
-import { Divider } from "../components/Divider";
-import { TextInput, PasswordInput } from "../components/TextInput";
-import Image from "next/image";
 import Link from "next/link";
+import { useFormState } from "react-dom";
+import { onLogIn } from "@/lib";
 
 const page = () => {
-  const [email, setEmail] = useState("");
+  const [state, action] = useFormState(onLogIn, {
+    message: '',
+  });
 
-  const handleEmail = (value: string) => {
-    setEmail(value);
-  };
+  const { push } = useRouter();
+
+  const [username, setUsername] = useState("");
 
   const [password, setPassword] = useState("");
 
-  const handlePassword = (value: string) => {
-    setPassword(value);
-  };
-
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-  };
-
   const checkInputs = () => {
-    return password.length >= 8 && email.length >= 0
+    return password.length >= 8 && username.length >= 0;
   }
+
+  useEffect(() => {
+    if (state.message === 'success') {
+      push('https://www.wikipedia.org/');
+    } else if (state.message !== '') {
+      throw new Error(state.message);
+    }
+  }, [state]);
 
   return (
     <div className="relative flex flex-col items-center w-full p-16 gap-8">
@@ -198,39 +201,61 @@ const page = () => {
         </div>
       </Link>
 
-      <div className="flex w-[480px] max-w-[480px]">
+      <form action={action} className="flex w-[480px] max-w-[480px]">
         <Card width="full">
           <div className="flex flex-col w-full">
-            <span className="text-[32px] font-bold leading-[36px]">Login</span>
-            <p className="text-textd">We are really happy to see you again</p>
+            <span className="text-[32px] font-bold leading-[36px]">Log in</span>
+            <p className="text-textd">Welcome back! We're thrilled to have you here.</p>
           </div>
 
           <Divider />
 
           <div className="flex flex-col gap-4 w-full">
             <div className="flex flex-col gap-2">
-              <span className="caption text-textd">Email address</span>
+              <span className="caption text-textd">Username</span>
               <TextInput
-                value={email}
-                onChange={handleEmail}
-                placeholder="Enter Email ID"
+                id="username"
+                type="username"
+                name="username"
+                placeholder="Enter Username"
+                value={username}
+                onChange={(value) => setUsername(value)}
+                required={true}
               />
             </div>
 
             <div className="flex flex-col gap-2 w-full">
               <span className="caption text-textd">Password</span>
               <PasswordInput
+                id={"password"}
                 type={showPassword ? "text" : "password"}
-                value={password}
-                onChange={handlePassword}
+                name={"password"}
                 placeholder="Enter Password"
+                value={password}
+                onChange={(value) => setPassword(value)}
                 visible={showPassword}
-                handleVisible={togglePasswordVisibility}
+                handleVisible={() => setShowPassword(!showPassword)}
+                required={true}
               />
             </div>
           </div>
 
-          <PrimaryBoxButton enabled={checkInputs()} >Login</PrimaryBoxButton>
+          <div className="flex flex-col w-full gap-4">
+            <div
+              className={`relative w-full grid ${
+                checkInputs() ? "opacity-100" : "opacity-50"
+              }`}
+            >
+              {checkInputs() ? null : (
+                <div className="absolute w-full h-full top-0 left-0" />
+              )}
+              <PrimaryBoxButton
+                enabled={checkInputs()}
+              >
+                Log in
+              </PrimaryBoxButton>
+            </div>
+          </div>
 
           <div className="flex justify-center items-center w-full">
             <TertiaryButton href="/forgotPass">
@@ -238,7 +263,7 @@ const page = () => {
             </TertiaryButton>
           </div>
         </Card>
-      </div>
+      </form>
       <div className="w-full max-w-[480px]">
         <Card>
           <ChildCard>
