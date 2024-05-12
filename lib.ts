@@ -153,3 +153,33 @@ export async function onRequestOneTimeLink(prevState: FormState, data: FormData)
     message: 'success'
  }
 }
+
+
+export async function onChangePassword(uuid: string, prevState: FormState, data: FormData): Promise<{ message: string }> {
+  const password = data.get("password")?.toString() ?? '';
+
+  const requestOptions: RequestInit = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'accept': 'application/json'
+    }
+  };
+  
+  try {
+    const response = await fetch(`http://localhost:8000/account/change-password?password_reset_id=${encodeURIComponent(uuid)}&password=${encodeURIComponent(password)}`, requestOptions);
+    const responseData = await response.json();
+
+    if (response.ok) {
+      console.log('Password changed successfully');
+      return { message: 'success' };
+    } else if (response.status === 400) {
+      throw new Error(responseData.detail);
+    } else {
+      throw new Error(response.statusText);
+    }
+  } catch (error: any) {
+    console.error('Error occurred while changing password:', error);
+    return { message: error.message };
+  }
+}

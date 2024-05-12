@@ -1,50 +1,45 @@
 "use client";
 
-import {
-  TertiaryButton,
-  PrimaryBoxButton,
-  SecondaryBoxButton,
-} from "@/app/components/Buttons";
-import { Card, ChildCard } from "@/app/components/Cards";
-import Checkbox from "@/app/components/Checkbox";
-import { Divider } from "@/app/components/Divider";
-import { TextInput, PasswordInput } from "@/app/components/TextInput";
-import { motion } from "framer-motion";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
-import Popup from "@/app/components/PopUp";
+import { motion } from "framer-motion";
+import { Card, ChildCard } from "@/app/components/Cards";
+import { Divider } from "@/app/components/Divider";
+import { PasswordInput, TextInput } from "@/app/components/TextInput";
+import {
+  PrimaryBoxButton,
+  TertiaryButton,
+} from "@/app/components/Buttons";
 import Link from "next/link";
+import { useFormState } from "react-dom";
+import { onChangePassword } from "@/lib";
 
-const page = () => {
+export default function ChangePassword({ params }: {
+  params: {
+      uuid: string;
+  }
+}) {
+  const { push } = useRouter();
+
+  const [state, action] = useFormState(onChangePassword.bind(null, params.uuid), {
+    message: '',
+  });
   const [password, setPassword] = useState("");
-
-  const handlePassword = (value: string) => {
-    setPassword(value);
-  };
 
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-  };
+  const checkInputs = () => {
+    return password.length >= 8;
+  }
 
-  const [confirmPass, setConfirmPass] = useState("");
-
-  const handleConfirmPass = (value: string) => {
-    setConfirmPass(value);
-  };
-
-  const [showConfirmPassword, setShowConfirmPassword] =
-    useState<boolean>(false);
-
-  const toggleConfirmPasswordVisibility = () => {
-    setShowConfirmPassword(!showConfirmPassword);
-  };
-
-  const [showPopup, setShowPopup] = useState(false);
-  const handleShowPopup = () => {
-    setShowPopup(!showPopup);
-  };
+  useEffect(() => {
+    if (state.message === 'success') {
+      push('https://www.wikipedia.org/');
+    } else if (state.message !== '') {
+      throw new Error(state.message);
+    }
+  }, [state]);
 
   return (
     <div className="relative flex flex-col items-center w-full p-16 gap-8">
@@ -199,56 +194,60 @@ const page = () => {
           </svg>
         </div>
       </motion.div>
+
       <Link href="/">
         <div className="flex w-[128px] md:w-fit h-[24px] md:h-[36px] items-center justify-center">
           <Image width={160} height={36} alt="" src="/logo.svg" />
         </div>
       </Link>
 
-      <div className="flex w-[480px] max-w-[480px]">
+      <form action={action} className="flex w-[480px] max-w-[480px]">
         <Card width="full">
           <div className="flex flex-col">
             <span className="text-[32px] font-bold leading-[36px]">
-              Forgot Password
+              Change Password
             </span>
-            <p className="text-textd">
-              Enter new password. It should not be same as previous password.
-            </p>
+            <p className="text-textd">Change your password.</p>
           </div>
 
           <Divider />
 
           <div className="flex flex-col gap-4 w-full">
             <div className="flex flex-col gap-2">
-              <span className="caption text-textd">Password</span>
-              <PasswordInput
-                type={showPassword ? "text" : "password"}
-                value={password}
-                onChange={handlePassword}
-                placeholder="Enter Password"
-                visible={showPassword}
-                handleVisible={togglePasswordVisibility}
-              />
-            </div>
-
-            <div className="flex flex-col gap-2">
-              <span className="caption text-textd">Confirm Password</span>
-              <PasswordInput
-                type={showConfirmPassword ? "text" : "password"}
-                value={confirmPass}
-                onChange={handleConfirmPass}
-                placeholder="Re-enter Password"
-                visible={showConfirmPassword}
-                handleVisible={toggleConfirmPasswordVisibility}
-                message="Use 8 or more characters with a mix of letters, numbers & symbols"
-              />
+              <span className="caption text-textd">New password</span>
+                <PasswordInput
+                  id={"password"}
+                  type={showPassword ? "text" : "password"}
+                  name={"password"}
+                  placeholder="Enter New Password"
+                  value={password}
+                  onChange={(value) => setPassword(value)}
+                  visible={showPassword}
+                  handleVisible={() => setShowPassword(!showPassword)}
+                  required={true}
+                />
             </div>
           </div>
 
-          <PrimaryBoxButton onClick={handleShowPopup}>Submit</PrimaryBoxButton>
+          <div className="flex flex-col w-full gap-4">
+            <div
+              className={`relative w-full grid ${
+                checkInputs() ? "opacity-100" : "opacity-50"
+              }`}
+            >
+              {checkInputs() ? null : (
+                <div className="absolute w-full h-full top-0 left-0" />
+              )}
+              <PrimaryBoxButton
+                enabled={checkInputs()}
+              >
+                
+                <span>Change password</span>
+              </PrimaryBoxButton>
+            </div>
+          </div>
         </Card>
-      </div>
-
+      </form>
       <div className="w-full max-w-[480px]">
         <Card>
           <ChildCard>
@@ -261,14 +260,6 @@ const page = () => {
           </ChildCard>
         </Card>
       </div>
-
-      <Popup
-        title="Password Reset Successfully"
-        desc="For security purpose we will remove your login from all over devices."
-        onClose={handleShowPopup}
-      />
     </div>
   );
 };
-
-export default page;
