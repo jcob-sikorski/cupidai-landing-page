@@ -1,45 +1,22 @@
 "use client";
 
-import { PrimaryBoxButton, TertiaryButton } from "@/app/components/Buttons";
-import { Card, ChildCard } from "@/app/components/Cards";
-import { Divider } from "@/app/components/Divider";
-import { TextInput } from "@/app/components/TextInput";
-import { motion } from "framer-motion";
-import React, { useState } from "react";
+import React from "react";
 import Image from "next/image";
+import { motion } from "framer-motion";
+import { Card } from "../components/Cards";
+import { Divider } from "../components/Divider";
+import {
+  PrimaryBoxButton,
+} from "../components/Buttons";
 import Link from "next/link";
 
-const page = () => {
-  const [code1, setCode1] = useState("");
-
-  const handleCode1 = (value: string) => {
-    setCode1(value);
-  };
-
-  const [code2, setCode2] = useState("");
-
-  const handleCode2 = (value: string) => {
-    setCode2(value);
-  };
-
-  const [code3, setCode3] = useState("");
-
-  const handleCode3 = (value: string) => {
-    setCode3(value);
-  };
-
-  const [code4, setCode4] = useState("");
-
-  const handleCode4 = (value: string) => {
-    setCode4(value);
-  };
-
-  const [code5, setCode5] = useState("");
-
-  const handleCode5 = (value: string) => {
-    setCode5(value);
-  };
-
+export default function ErrorBoundary({
+  error,
+  reset,
+}: {
+  error: Error
+  reset: () => void
+}) {
   return (
     <div className="relative flex flex-col items-center w-full p-16 gap-8">
       <motion.div className=" overflow-hidden z-[-1] w-full fixed bottom-0 flex items-end justify-center">
@@ -204,73 +181,30 @@ const page = () => {
         <Card width="full">
           <div className="flex flex-col">
             <span className="text-[32px] font-bold leading-[36px]">
-              Forgot Password
+              Error
             </span>
-            <p className="text-textd">Loss password? Don’t worry we got you.</p>
+            <p className="text-textd">
+              {error.message}
+            </p>
           </div>
 
           <Divider />
 
-          <div className="flex flex-col gap-4 w-full">
-            <div className="flex flex-col gap-2">
-              <div className="w-full flex item-center justify-between">
-                <span className="caption text-textd">OTP</span>
-                <span className="caption text-textd">Resend in 00:45</span>
-              </div>
-              <div className="grid grid-cols-5 gap-2">
-                <TextInput
-                  number
-                  value={code1}
-                  onChange={handleCode1}
-                  placeholder="0"
-                />
-                <TextInput
-                  number
-                  value={code2}
-                  onChange={handleCode2}
-                  placeholder="0"
-                />
-                <TextInput
-                  number
-                  value={code3}
-                  onChange={handleCode3}
-                  placeholder="0"
-                />
-                <TextInput
-                  number
-                  value={code4}
-                  onChange={handleCode4}
-                  placeholder="0"
-                />
-                <TextInput
-                  number
-                  value={code5}
-                  onChange={handleCode5}
-                  placeholder="0"
-                />
-              </div>
+          <div className="flex flex-col w-full gap-4">
+            <div
+              className="relative w-full grid"
+            >
+              <PrimaryBoxButton
+                onClick={() => reset()}
+                enabled={true}
+                form={false}
+              >
+                Try Again
+              </PrimaryBoxButton>
             </div>
           </div>
-
-          <PrimaryBoxButton href="/forgotPass/changePass">
-            Verify
-          </PrimaryBoxButton>
-        </Card>
-      </div>
-      <div className="w-full max-w-[480px]">
-        <Card>
-          <ChildCard>
-            <div className="flex gap-2 w-full items-center justify-center">
-              <p>Already have an account?</p>
-              <TertiaryButton href="/login">
-                <span className="gradient_text font-bold">Login</span>
-              </TertiaryButton>
-            </div>
-          </ChildCard>
         </Card>
       </div>
     </div>
-  );
-};
-
-export default page;
+  )
+}

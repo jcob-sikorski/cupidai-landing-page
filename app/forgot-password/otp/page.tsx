@@ -1,45 +1,44 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
-import Image from "next/image";
+import { PrimaryBoxButton, TertiaryButton } from "@/app/components/Buttons";
+import { Card, ChildCard } from "@/app/components/Cards";
+import { Divider } from "@/app/components/Divider";
+import { TextInput } from "@/app/components/TextInput";
 import { motion } from "framer-motion";
-import { Card, ChildCard } from "../components/Cards";
-import { Divider } from "../components/Divider";
-import { TextInput, PasswordInput } from "../components/TextInput";
-import {
-  PrimaryBoxButton,
-  SecondaryBoxButton,
-  TertiaryButton,
-} from "../components/Buttons";
+import React, { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
-import { useFormState } from "react-dom";
-import { onLogIn } from "@/lib";
 
 const page = () => {
-  const [state, action] = useFormState(onLogIn, {
-    message: '',
-  });
+  const [code1, setCode1] = useState("");
 
-  const { push } = useRouter();
+  const handleCode1 = (value: string) => {
+    setCode1(value);
+  };
 
-  const [username, setUsername] = useState("");
+  const [code2, setCode2] = useState("");
 
-  const [password, setPassword] = useState("");
+  const handleCode2 = (value: string) => {
+    setCode2(value);
+  };
 
-  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [code3, setCode3] = useState("");
 
-  const checkInputs = () => {
-    return password.length >= 8 && username.length >= 0;
-  }
+  const handleCode3 = (value: string) => {
+    setCode3(value);
+  };
 
-  useEffect(() => {
-    if (state.message === 'success') {
-      push('https://www.wikipedia.org/');
-    } else if (state.message !== '') {
-      throw new Error(state.message);
-    }
-  }, [state]);
+  const [code4, setCode4] = useState("");
+
+  const handleCode4 = (value: string) => {
+    setCode4(value);
+  };
+
+  const [code5, setCode5] = useState("");
+
+  const handleCode5 = (value: string) => {
+    setCode5(value);
+  };
 
   return (
     <div className="relative flex flex-col items-center w-full p-16 gap-8">
@@ -201,76 +200,70 @@ const page = () => {
         </div>
       </Link>
 
-      <form action={action} className="flex w-[480px] max-w-[480px]">
+      <div className="flex w-[480px] max-w-[480px]">
         <Card width="full">
-          <div className="flex flex-col w-full">
-            <span className="text-[32px] font-bold leading-[36px]">Log in</span>
-            <p className="text-textd">Welcome back! We're thrilled to have you here.</p>
+          <div className="flex flex-col">
+            <span className="text-[32px] font-bold leading-[36px]">
+              Forgot Password
+            </span>
+            <p className="text-textd">Forgotten your password? No problem, we've got you covered.</p>
           </div>
 
           <Divider />
 
           <div className="flex flex-col gap-4 w-full">
             <div className="flex flex-col gap-2">
-              <span className="caption text-textd">Username</span>
-              <TextInput
-                id="username"
-                type="username"
-                name="username"
-                placeholder="Enter Username"
-                value={username}
-                onChange={(value) => setUsername(value)}
-                required={true}
-              />
-            </div>
-
-            <div className="flex flex-col gap-2 w-full">
-              <span className="caption text-textd">Password</span>
-              <PasswordInput
-                id={"password"}
-                type={showPassword ? "text" : "password"}
-                name={"password"}
-                placeholder="Enter Password"
-                value={password}
-                onChange={(value) => setPassword(value)}
-                visible={showPassword}
-                handleVisible={() => setShowPassword(!showPassword)}
-                required={true}
-              />
-            </div>
-          </div>
-
-          <div className="flex flex-col w-full gap-4">
-            <div
-              className={`relative w-full grid ${
-                checkInputs() ? "opacity-100" : "opacity-50"
-              }`}
-            >
-              {checkInputs() ? null : (
-                <div className="absolute w-full h-full top-0 left-0" />
-              )}
-              <PrimaryBoxButton
-                enabled={checkInputs()}
-              >
-                Log in
-              </PrimaryBoxButton>
+              <div className="w-full flex item-center justify-between">
+                <span className="caption text-textd">OTP</span>
+                <span className="caption text-textd">Resend in 00:45</span>
+              </div>
+              <div className="grid grid-cols-5 gap-2">
+                <TextInput
+                  number
+                  value={code1}
+                  onChange={handleCode1}
+                  placeholder="0"
+                />
+                <TextInput
+                  number
+                  value={code2}
+                  onChange={handleCode2}
+                  placeholder="0"
+                />
+                <TextInput
+                  number
+                  value={code3}
+                  onChange={handleCode3}
+                  placeholder="0"
+                />
+                <TextInput
+                  number
+                  value={code4}
+                  onChange={handleCode4}
+                  placeholder="0"
+                />
+                <TextInput
+                  number
+                  value={code5}
+                  onChange={handleCode5}
+                  placeholder="0"
+                />
+              </div>
             </div>
           </div>
 
-          <div className="flex justify-center items-center w-full">
-            <TertiaryButton href="/forgot-password">
-              Forgot your password?
-            </TertiaryButton>
-          </div>
+          <PrimaryBoxButton href="/forgot-password/changePass">
+            Verify
+          </PrimaryBoxButton>
         </Card>
-      </form>
+      </div>
       <div className="w-full max-w-[480px]">
         <Card>
           <ChildCard>
             <div className="flex gap-2 w-full items-center justify-center">
-              <p>Don’t have account?</p>
-              <TertiaryButton href="/signup">
-                <span className="gradient_text font-bold">Create Now</span>
+              <p>Already have an account?</p>
+              <TertiaryButton href="/login">
+                <span className="gradient_text font-bold">Login</span>
               </TertiaryButton>
             </div>
           </ChildCard>

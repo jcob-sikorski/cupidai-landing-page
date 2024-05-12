@@ -115,28 +115,41 @@ export async function onLogIn(prevState: FormState, data: FormData): Promise<{ m
  }
 }
 
-export async function logout() {
-  // Destroy the session
-  cookies().set("cupidai-session", "", {});
-}
+export async function onRequestOneTimeLink(prevState: FormState, data: FormData): Promise<{ message: string }> {
+  console.log("ACTIVATED REQUEST ONE TIME LINK")
+  const email = data.get("email")?.toString() ?? '';
 
-export async function getSession() {
-  const session = cookies().get("cupidai-session")?.value;
-  if (!session) return null;
-  // return await decrypt(session);
-}
+  console.log(email);
 
-export async function updateSession(request: NextRequest) {
-  const session = request.cookies.get("cupidai-session")?.value;
-  if (!session) return;
+  const requestOptions: RequestInit = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'accept': 'application/json'
+    },
+    body: JSON.stringify({ email: email })
+  };
+  
+  try {
+    const response = await fetch('http://localhost:8000/account/request-one-time-link', requestOptions);
+    const responseData = await response.json();
 
-  const jwt = ""; // TODO: get the jwt from the backend server
+    if (response.status === 200) {
+      console.log('One-time link requested successfully');
+    } else if (response.status === 404 || response.status === 404) {
+      throw new Error(responseData.detail);
+    } else {
+      // Handle other error cases
+      throw new Error(response.statusText);
+    }
+  } catch (error: any) {
+    console.error('Error occurred while requesting one-time link:', error);
 
-  const res = NextResponse.next();
-  res.cookies.set({
-    name: "cupidai-session",
-    value: jwt,
-    httpOnly: true,
-  });
-  return res;
+    return {
+      message: error.message
+   }
+  }
+  return {
+    message: 'success'
+ }
 }

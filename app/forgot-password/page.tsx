@@ -1,36 +1,41 @@
 "use client";
 
+import React, { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import Image from "next/image";
 import { motion } from "framer-motion";
-import React, { useState } from "react";
-import {
-  PrimaryBoxButton,
-  IconButton,
-  TertiaryButton,
-} from "../components/Buttons";
 import { Card, ChildCard } from "../components/Cards";
 import { Divider } from "../components/Divider";
-import { TextInput, PasswordInput } from "../components/TextInput";
-import Image from "next/image";
+import { TextInput } from "../components/TextInput";
+import {
+  PrimaryBoxButton,
+  TertiaryButton,
+} from "../components/Buttons";
 import Link from "next/link";
+import { useFormState } from "react-dom";
+import { onRequestOneTimeLink } from "@/lib";
 
 const page = () => {
+  const [state, action] = useFormState(onRequestOneTimeLink, {
+    message: '',
+  });
+
   const [email, setEmail] = useState("");
 
-  const handleEmail = (value: string) => {
-    setEmail(value);
-  };
+  const [success, setSuccess] = useState(false);
 
-  const [password, setPassword] = useState("");
+  const checkInputs = () => {
+    return email.length >= 0;
+  }
 
-  const handlePassword = (value: string) => {
-    setPassword(value);
-  };
+  useEffect(() => {
+    if (state.message === 'success') {
+      setSuccess(true);
+    } else if (state.message !== '') {
+      throw new Error(state.message);
+    }
+  }, [state]);
 
-  const [showPassword, setShowPassword] = useState<boolean>(false);
-
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-  };
   return (
     <div className="relative flex flex-col items-center w-full p-16 gap-8">
       <motion.div className=" overflow-hidden z-[-1] w-full fixed bottom-0 flex items-end justify-center">
@@ -191,13 +196,13 @@ const page = () => {
         </div>
       </Link>
 
-      <div className="flex w-[480px] max-w-[480px]">
+      <form action={action} className="flex w-[480px] max-w-[480px]">
         <Card width="full">
           <div className="flex flex-col">
             <span className="text-[32px] font-bold leading-[36px]">
               Forgot Password
             </span>
-            <p className="text-textd">Loss password? Don’t worry we got you.</p>
+            <p className="text-textd">Forgotten your password? No problem, we've got you covered.</p>
           </div>
 
           <Divider />
@@ -206,17 +211,55 @@ const page = () => {
             <div className="flex flex-col gap-2">
               <span className="caption text-textd">Email address</span>
               <TextInput
+                id="email"
+                type="email"
+                name="email"
+                placeholder="Enter Email"
                 value={email}
-                onChange={handleEmail}
-                placeholder="Enter Email ID"
-                message="We will send you OTP on above email. you will get OTP if you are register with us"
+                onChange={(value) => setEmail(value)}
+                required={true}
+                message="We'll send a one-time link to the email provided above. You'll receive the link if you're registered with us."
               />
             </div>
           </div>
 
-          <PrimaryBoxButton href="/forgotPass/otp">Send OTP</PrimaryBoxButton>
+          <div className="flex flex-col w-full gap-4">
+            <div
+              className={`relative w-full grid ${
+                checkInputs() ? "opacity-100" : "opacity-50"
+              }`}
+            >
+              {checkInputs() ? null : (
+                <div className="absolute w-full h-full top-0 left-0" />
+              )}
+              <PrimaryBoxButton
+                enabled={checkInputs()}
+              >
+                {success ? (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      width="24"
+                      height="24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M5 13l4 4L19 7"
+                      />
+                    </svg>
+                  ) : (
+                    <span>Send</span>
+                  )
+                }
+              </PrimaryBoxButton>
+            </div>
+          </div>
         </Card>
-      </div>
+      </form>
       <div className="w-full max-w-[480px]">
         <Card>
           <ChildCard>
