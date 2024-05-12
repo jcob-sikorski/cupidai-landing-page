@@ -40,7 +40,7 @@ const page = () => {
 
   useEffect(() => {
     if (state.message === 'success') {
-      push('https://www.wikipedia.org/');
+      push('http://localhost:3000/dashboard');
     } else if (state.message !== '') {
       throw new Error(state.message);
     }

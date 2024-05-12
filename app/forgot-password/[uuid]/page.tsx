@@ -35,7 +35,7 @@ export default function ChangePassword({ params }: {
 
   useEffect(() => {
     if (state.message === 'success') {
-      push('https://www.wikipedia.org/');
+      push('http://localhost:3001/login');
     } else if (state.message !== '') {
       throw new Error(state.message);
     }
