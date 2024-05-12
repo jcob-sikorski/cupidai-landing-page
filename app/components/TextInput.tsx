@@ -5,20 +5,71 @@ import React, { useRef } from "react";
 interface TextInputProps {
   value: string;
   onChange: (value: string) => void;
-  placeholder?: string;
+  id: string;
+  type: string;
+  name: string;
+  placeholder: string;
+  required: boolean;
+  message?: string;
   number?: boolean;
-  type?: string;
   visible?: boolean;
   handleVisible?: () => void;
-  message?: string;
+
 }
 
 export const TextInput: React.FC<TextInputProps> = ({
+  id,
+  type,
+  name,
+  placeholder,
   value,
   onChange,
-  placeholder,
-  number,
   message,
+  required=false
+}) => {
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    // Get the input value
+    let inputValue = event.target.value;
+
+    // Update the state with the sanitized value
+    onChange(inputValue);
+  };
+
+  return (
+    <div className="relative flex w-full flex-col gap-1">
+      <input
+        id={id}
+        type={type}
+        name={name}
+        placeholder={placeholder}
+        value={value}
+        onChange={handleInputChange}
+        required={required}
+        minLength={8}
+        className="rounded-[16px] px-4 p-2 outline-none bg-gray text-white w-full h-[40px]"
+      />
+
+      {message && (
+        <div className="flex gap-2 w-full">
+          <span className="text-[11px] text-textd w-full ml-4">{message}</span>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export const PasswordInput: React.FC<TextInputProps> = ({
+  id,
+  type,
+  name,
+  placeholder,
+  value,
+  onChange,
+  visible,
+  handleVisible,
+  message,
+  required=false
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -33,56 +84,6 @@ export const TextInput: React.FC<TextInputProps> = ({
     // Get the input value
     let inputValue = event.target.value;
 
-    if (number) {
-      inputValue = inputValue.replace(/\D/g, "");
-    }
-    // Remove any non-numeric characters
-
-    // Update the state with the sanitized value
-    onChange(inputValue);
-  };
-
-  return (
-    <div className="relative flex w-full flex-col gap-1">
-      <input
-        ref={inputRef}
-        type="text"
-        value={value}
-        onChange={handleInputChange}
-        placeholder={placeholder}
-        className="rounded-[16px] px-4 p-2 outline-none bg-gray text-white w-full h-[40px]"
-      />
-
-      {message && (
-        <div className="flex gap-2 w-full">
-          <span className="text-[11px] text-textd w-full ml-4">{message}</span>
-        </div>
-      )}
-    </div>
-  );
-};
-
-export const PasswordInput: React.FC<TextInputProps> = ({
-  value,
-  onChange,
-  placeholder,
-  number,
-  type,
-  visible,
-  handleVisible,
-  message,
-}) => {
-  const inputRef = useRef<HTMLInputElement>(null);
-
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    // Get the input value
-    let inputValue = event.target.value;
-
-    if (number) {
-      inputValue = inputValue.replace(/\D/g, "");
-    }
-    // Remove any non-numeric characters
-
     // Update the state with the sanitized value
     onChange(inputValue);
   };
@@ -90,11 +91,14 @@ export const PasswordInput: React.FC<TextInputProps> = ({
   return (
     <div className="relative flex flex-col gap-1 w-full">
       <input
-        ref={inputRef}
-        type={type ? type : "text"}
+        id={id}
+        type={type}
+        name={name}
+        placeholder={placeholder}
         value={value}
         onChange={handleInputChange}
-        placeholder={placeholder}
+        required={required}
+        minLength={8}
         className="rounded-[16px] px-4 p-2 outline-none bg-gray text-white w-full h-[40px]"
       />
 

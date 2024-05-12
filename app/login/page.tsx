@@ -232,18 +232,6 @@ const page = () => {
 
           <PrimaryBoxButton enabled={checkInputs()} >Login</PrimaryBoxButton>
 
-          {/* <div className="flex items-center gap-4">
-            <Divider />
-            <span className="text-sm text-textd">OR</span>
-            <Divider />
-          </div> */}
-
-          {/* <div className="flex flex-col w-full gap-4">
-            <IconButton icon="/google.svg">Continue with Google</IconButton>
-            <IconButton icon="/facebook.svg">Continue with Google</IconButton>
-            <IconButton icon="/apple.svg">Continue with Google</IconButton>
-          </div> */}
-
           <div className="flex justify-center items-center w-full">
             <TertiaryButton href="/forgotPass">
               Forgot your password?

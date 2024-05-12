@@ -15,37 +15,13 @@ import Link from "next/link";
 import { useFormState } from "react-dom";
 import { onSignUp } from "@/lib";
 
-const page = () => {
-  const [state, action] = useFormState(onSignUp, {
-    message: '',
-  });
-
-  const { push } = useRouter();
-
-  const [email, setEmail] = useState("");
-
-  const [username, setUsername] = useState("");
-
-  const [password, setPassword] = useState("");
-
-  const [showPassword, setShowPassword] = useState<boolean>(false);
-
-  const [confirmPass, setConfirmPass] = useState("");
-
-  const [showConfirmPassword, setShowConfirmPassword] = useState<boolean>(false);
-
-  const checkInputs = () => {
-    return password.length >= 8 && confirmPass === password && email.length >= 0
-  }
-
-  useEffect(() => {
-    if (state.message === 'success') {
-      push('https://www.wikipedia.org/');
-    } else if (state.message !== '') {
-      throw new Error(state.message);
-    }
-  }, [state]);
-
+export default function ErrorBoundary({
+  error,
+  reset,
+}: {
+  error: Error
+  reset: () => void
+}) {
   return (
     <div className="relative flex flex-col items-center w-full p-16 gap-8">
       <motion.div className=" overflow-hidden z-[-1] w-full fixed bottom-0 flex items-end justify-center">
@@ -206,101 +182,35 @@ const page = () => {
         </div>
       </Link>
 
-      <form action={action} className="flex w-[480px] max-w-[480px]">
+      <div className="flex w-[480px] max-w-[480px]">
         <Card width="full">
           <div className="flex flex-col">
             <span className="text-[32px] font-bold leading-[36px]">
-              Sign Up
+              Error
             </span>
             <p className="text-textd">
-              Sign up for free to gain access to any of our products.
+              {error.message}
             </p>
-          </div>
-
-          <Divider />
-
-          <div className="flex flex-col gap-4 w-full">
-            <div className="flex flex-col gap-2">
-              <span className="caption text-textd">Email address</span>
-              <TextInput
-                id="email"
-                type="email"
-                name="email"
-                placeholder="Enter Email"
-                value={email}
-                onChange={(value) => setEmail(value)}
-                required={true}
-              />
-            </div>
-
-            <div className="flex flex-col gap-2">
-              <span className="caption text-textd">Username</span>
-              <TextInput
-                id="username"
-                type="username"
-                name="username"
-                placeholder="Enter Username"
-                value={username}
-                onChange={(value) => setUsername(value)}
-                required={true}
-              />
-            </div>
-
-            <div className="flex flex-col gap-2">
-              <span className="caption text-textd">Password</span>
-              <PasswordInput
-                id={"password"}
-                type={showPassword ? "text" : "password"}
-                name={"password"}
-                placeholder="Enter Password"
-                value={password}
-                onChange={(value) => setPassword(value)}
-                visible={showPassword}
-                handleVisible={() => setShowPassword(!showPassword)}
-                required={true}
-              />
-            </div>
-
-            <div className="flex flex-col gap-2">
-              <span className="caption text-textd">Confirm Password</span>
-              <PasswordInput
-                id={"confirm-password"}
-                type={showConfirmPassword ? "text" : "password"}
-                name={"confirm-password"}
-                placeholder="Enter Password"
-                value={confirmPass}
-                onChange={(value) => setConfirmPass(value)}
-                visible={showConfirmPassword}
-                handleVisible={() => setShowConfirmPassword(!showConfirmPassword)}
-                message="Use 8 or more characters with a mix of letters, numbers & symbols"
-                required={true}
-              />
-            </div>
           </div>
 
           <Divider />
 
           <div className="flex flex-col w-full gap-4">
             <div
-              className={`relative w-full grid ${
-                checkInputs() ? "opacity-100" : "opacity-50"
-              }`}
+              className="relative w-full grid"
             >
-              {checkInputs() ? null : (
-                <div className="absolute w-full h-full top-0 left-0" />
-              )}
+              <div className="absolute w-full h-full top-0 left-0" />
               <PrimaryBoxButton
-                enabled={checkInputs()}
+                onClick={() => reset()}
+                enabled={true}
+                form={false}
               >
-                Sign up
+                Try Again
               </PrimaryBoxButton>
             </div>
-            <SecondaryBoxButton href="/login">Login</SecondaryBoxButton>
           </div>
         </Card>
-      </form>
+      </div>
     </div>
-  );
-};
-
-export default page;
+  )
+}

@@ -108,7 +108,7 @@ const page = () => {
 
         <div className="flex gap-2 items-center w-fit">
           <SecondaryButton href="/login">Log in</SecondaryButton>
-          <PrimaryButton href="/signup">Sing up</PrimaryButton>
+          <PrimaryButton href="/signup">Sign up</PrimaryButton>
         </div>
       </div>
     </div>
