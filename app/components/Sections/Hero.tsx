@@ -39,9 +39,8 @@ const Hero = () => {
             Elevate your agency's output with state-of-the-art AI, engineered to
             innovate at the speed of thought.
           </p>
-
-          <PrimaryButton>Try Now</PrimaryButton>
         </motion.div>
+        <PrimaryButton href="/signup">Try Now</PrimaryButton>
         <motion.div className="relative z-10 w-full flex flex-col justify-center items-center">
           <motion.div className="absolute mr-[-32px] top-[64px] flex items-center justify-center">
             <Image

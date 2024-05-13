@@ -4,6 +4,7 @@ import React, { useRef } from "react";
 import Image from "next/image";
 import { easeInOut, motion, useScroll, useTransform } from "framer-motion";
 import ImageContainer from "../ImageContainer";
+import { PrimaryBoxButton } from "../Buttons";
 
 const About = () => {
   const target = useRef<HTMLDivElement | null>(null);
@@ -181,6 +182,7 @@ const About = () => {
             Chief of Staff, Pallet
           </motion.span>
         </div>
+        <PrimaryBoxButton href="/signup" enabled={true}>Try now</PrimaryBoxButton>
       </div>
     </motion.section>
   );

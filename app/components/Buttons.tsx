@@ -14,7 +14,11 @@ interface Props {
   form?: boolean;
 }
 
-export const PrimaryButton = ({ children, onClick, href }: Props) => {
+export const PrimaryButton = ({ 
+  children, 
+  onClick, 
+  href
+}: Props) => {
   const [mouseEnter, setMouseEnter] = useState(false);
 
   const handleMouseEnter = () => {
@@ -63,8 +67,8 @@ export const PrimaryButton = ({ children, onClick, href }: Props) => {
 export const PrimaryBoxButton = ({ 
   children, 
   onClick, 
-  enabled,
-  form=true
+  href,
+  enabled=true,
 }: Props) => {
   const [mouseEnter, setMouseEnter] = useState(false);
 
@@ -82,44 +86,7 @@ export const PrimaryBoxButton = ({
   };
 
   return (
-    form ? (
-      <motion.button
-        type="submit"
-        onClick={handleClick}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseEnter}
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          padding: "8px 24px",
-          borderRadius: "8px",
-          cursor: enabled ? "pointer" : "default", // Adjust cursor based on enabled prop
-          background:
-            "linear-gradient(238.05deg, #7F04E3 4.82%, #FF006B 116.43%)",
-          opacity: opacity, // Set opacity based on enabled prop
-        }}
-        whileHover={{
-          background: [
-            null,
-            "linear-gradient(238deg, #7F04E3 4.82%, #FF006B 116.43%)",
-            "linear-gradient(90deg, #7F04E3 4.82%, #FF006B 116.43%)",
-            "linear-gradient(175deg, #7F04E3 4.82%, #FF006B 116.43%)",
-            "linear-gradient(15deg, #7F04E3 4.82%, #FF006B 116.43%)",
-            "linear-gradient(238deg, #7F04E3 4.82%, #FF006B 116.43%)",
-          ],
-        }}
-        transition={{
-          duration: 3,
-          ease: "easeInOut",
-          times: [0, 0.01, 0.5, 0.8, 1],
-          repeat: Infinity,
-        }}
-        className={`text-text text-sm font-bold`}
-      >
-        {children}
-      </motion.button>
-    ) : (
+    <Link href={href ? href : ""}>
       <motion.div
         onClick={handleClick}
         onMouseEnter={handleMouseEnter}
@@ -155,7 +122,7 @@ export const PrimaryBoxButton = ({
       >
         {children}
       </motion.div>
-    )
+    </Link>
   );
 };
 
