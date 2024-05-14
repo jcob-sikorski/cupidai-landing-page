@@ -182,7 +182,7 @@ const About = () => {
             Chief of Staff, Pallet
           </motion.span>
         </div>
-        <PrimaryBoxButton href="/signup" enabled={true}>Try now</PrimaryBoxButton>
+        <PrimaryBoxButton href="/signup" enabled={true} form={false}>Try now</PrimaryBoxButton>
       </div>
     </motion.section>
   );

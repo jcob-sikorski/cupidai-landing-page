@@ -366,7 +366,7 @@ const Pricing = () => {
             </div>
           </div>
 
-          <PrimaryBoxButton>Select Plan</PrimaryBoxButton>
+          <PrimaryBoxButton enabled={true} form={false}>Select Plan</PrimaryBoxButton>
         </motion.div>
 
         <motion.div

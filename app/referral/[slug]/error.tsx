@@ -13,7 +13,7 @@ import Footer from "@/app/components/Footer";
 import { motion } from "framer-motion";
 import NavBar from "@/app/components/NavBar/page";
 
-export default function LandingPage() {
+export default function ErrorBoundary() {
   return (
     <main className="flex min-h-screen flex-col items-center w-[100vw]">
       <div className="flex flex-col items-center w-full">

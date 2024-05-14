@@ -50,7 +50,7 @@ const Cta = () => {
           Unleash the power of AI within cupid. Upgrade your productivity with
           cupid, the image genetation app.
         </p>
-        <PrimaryBoxButton href="/signup" enabled={true}>Try now</PrimaryBoxButton>
+        <PrimaryBoxButton href="/signup" enabled={true} form={false}>Try now</PrimaryBoxButton>
       </div>
     </motion.section>
   );

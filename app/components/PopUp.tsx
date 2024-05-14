@@ -22,7 +22,7 @@ const Popup: React.FC<PopupProps> = ({ title, desc }) => {
             <p className="text-textd">{desc}</p>
           </div>
 
-          <PrimaryBoxButton href="/login">Login</PrimaryBoxButton>
+          <PrimaryBoxButton href="/login" enabled={true} form={false}>Login</PrimaryBoxButton>
         </Card>
       </div>
     </div>

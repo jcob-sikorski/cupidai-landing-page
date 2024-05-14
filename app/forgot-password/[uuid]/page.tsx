@@ -241,7 +241,6 @@ export default function ChangePassword({ params }: {
               <PrimaryBoxButton
                 enabled={checkInputs()}
               >
-                
                 <span>Change password</span>
               </PrimaryBoxButton>
             </div>

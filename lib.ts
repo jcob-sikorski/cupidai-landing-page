@@ -1,8 +1,6 @@
 "use server";
 
-import { Passions_Conflict } from "next/font/google";
 import { cookies } from "next/headers";
-import { NextRequest, NextResponse } from "next/server";
 
 type FormState = {
   message: string;
@@ -36,7 +34,17 @@ export async function onSignUp(prevState: FormState, data: FormData): Promise<{ 
   };
   
   try {
-    const response = await fetch(`http://localhost:8000/account/signup?email=${encodeURIComponent(email)}`, requestOptions);
+    let url = "";
+    
+    const referral_id = cookies().get("cupidai-ref-id")?.value;
+
+    if (referral_id) {
+      url = `http://localhost:8000/account/signup-ref?referral_id=${encodeURIComponent(referral_id)}`;
+    } else {
+      url = "http://localhost:8000/account/signup";
+    }
+
+    const response = await fetch(url, requestOptions);
     const responseData = await response.json();
 
     if (response.status === 200) {

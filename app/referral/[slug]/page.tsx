@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import Image from "next/image";
 import Hero from "@/app/components/Sections/Hero";
 import Companies from "@/app/components/Sections/Companies";
@@ -13,7 +13,22 @@ import Footer from "@/app/components/Footer";
 import { motion } from "framer-motion";
 import NavBar from "@/app/components/NavBar/page";
 
-export default function LandingPage() {
+export default function ReferralLandingPage({ params }: {
+  params: {
+    slug: string;
+  }
+}) {
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        await fetch(`/api?referral_id=${params?.slug}`);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+    fetchData();
+  }, []);
+
   return (
     <main className="flex min-h-screen flex-col items-center w-[100vw]">
       <div className="flex flex-col items-center w-full">
