@@ -23,7 +23,6 @@ export async function onSignUp(prevState: FormState, data: FormData): Promise<{ 
       'accept': 'application/json'
     },
     body: new URLSearchParams({
-      'email': email,
       'username': username,
       'password': password,
       'grant_type': '',
@@ -39,9 +38,9 @@ export async function onSignUp(prevState: FormState, data: FormData): Promise<{ 
     const referral_id = cookies().get("cupidai-ref-id")?.value;
 
     if (referral_id) {
-      url = `http://localhost:8000/account/signup-ref?referral_id=${encodeURIComponent(referral_id)}`;
+      url = `http://localhost:8000/account/signup-ref?email=${encodeURIComponent(email)}&referral_id=${encodeURIComponent(referral_id)}`;
     } else {
-      url = "http://localhost:8000/account/signup";
+      url = `http://localhost:8000/account/signup?email=${encodeURIComponent(email)}`;
     }
 
     const response = await fetch(url, requestOptions);

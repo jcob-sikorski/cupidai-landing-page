@@ -15,13 +15,16 @@ export async function GET(request: NextRequest) {
 
   try {
     if (referral_id) {
-      cookies().set("cupidai-ref-id", referral_id, { httpOnly: true });
-
       const response = await fetch(`http://localhost:8000/referral/link-clicked?referral_id=${referral_id}`, requestOptions);
-      const responseData = await response.json();
   
-      if (response.status === 200) {
-        return responseData;
+      if (response.status === 201) {
+        cookies().set({
+          name: "cupidai-ref-id",
+          value: referral_id,
+          httpOnly: true
+        });
+        // // Return the modified response object
+        return response;
       } else {
         throw new Error(response.statusText); // TODO: we need to handle this error on the client side
       }
