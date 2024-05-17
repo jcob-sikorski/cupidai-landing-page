@@ -213,7 +213,7 @@ const Pricing = () => {
               </div>
             </div>
           </div>
-          <SecondaryBoxButton>Select Plan</SecondaryBoxButton>
+          <SecondaryBoxButton href="/signup">Select Plan</SecondaryBoxButton>
         </motion.div>
 
         <motion.div
@@ -366,7 +366,7 @@ const Pricing = () => {
             </div>
           </div>
 
-          <PrimaryBoxButton enabled={true} form={false}>Select Plan</PrimaryBoxButton>
+          <PrimaryBoxButton enabled={true} form={false} href="/signup">Select Plan</PrimaryBoxButton>
         </motion.div>
 
         <motion.div
@@ -569,7 +569,7 @@ const Pricing = () => {
               </div>
             </div>
           </div>
-          <SecondaryBoxButton>Select Plan</SecondaryBoxButton>
+          <SecondaryBoxButton href="/signup">Select Plan</SecondaryBoxButton>
         </motion.div>
       </div>
 
