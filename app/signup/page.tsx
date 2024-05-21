@@ -40,7 +40,7 @@ const page = () => {
 
   useEffect(() => {
     if (state.message === 'success') {
-      push('http://localhost:3000/dashboard');
+      push(`${process.env.NEXT_PUBLIC_WEBAPP_DOMAIN}/dashboard`);
     } else if (state.message !== '') {
       throw new Error(state.message);
     }

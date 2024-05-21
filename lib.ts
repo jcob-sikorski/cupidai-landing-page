@@ -38,9 +38,9 @@ export async function onSignUp(prevState: FormState, data: FormData): Promise<{ 
     const referral_id = cookies().get("cupidai-ref-id")?.value;
 
     if (referral_id) {
-      url = `http://localhost:8000/account/signup-ref?email=${encodeURIComponent(email)}&referral_id=${encodeURIComponent(referral_id)}`;
+      url = `${process.env.BACKEND_DOMAIN}/account/signup-ref?email=${encodeURIComponent(email)}&referral_id=${encodeURIComponent(referral_id)}`;
     } else {
-      url = `http://localhost:8000/account/signup?email=${encodeURIComponent(email)}`;
+      url = `${process.env.BACKEND_DOMAIN}/account/signup?email=${encodeURIComponent(email)}`;
     }
 
     const response = await fetch(url, requestOptions);
@@ -95,7 +95,7 @@ export async function onLogIn(prevState: FormState, data: FormData): Promise<{ m
   };
   
   try {
-    const response = await fetch(`http://localhost:8000/account/login`, requestOptions);
+    const response = await fetch(`${process.env.BACKEND_DOMAIN}/account/login`, requestOptions);
     const responseData = await response.json();
 
     if (response.status === 200) {
@@ -138,7 +138,7 @@ export async function onRequestOneTimeLink(prevState: FormState, data: FormData)
   };
   
   try {
-    const response = await fetch('http://localhost:8000/account/request-one-time-link', requestOptions);
+    const response = await fetch(`${process.env.BACKEND_DOMAIN}/account/request-one-time-link`, requestOptions);
     const responseData = await response.json();
 
     if (response.status === 200) {
@@ -174,7 +174,7 @@ export async function onChangePassword(uuid: string, prevState: FormState, data:
   };
   
   try {
-    const response = await fetch(`http://localhost:8000/account/change-password?password_reset_id=${encodeURIComponent(uuid)}&password=${encodeURIComponent(password)}`, requestOptions);
+    const response = await fetch(`${process.env.BACKEND_DOMAIN}/account/change-password?password_reset_id=${encodeURIComponent(uuid)}&password=${encodeURIComponent(password)}`, requestOptions);
     const responseData = await response.json();
 
     if (response.ok) {

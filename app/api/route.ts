@@ -15,7 +15,7 @@ export async function GET(request: NextRequest) {
 
   try {
     if (referral_id) {
-      const response = await fetch(`http://localhost:8000/referral/link-clicked?referral_id=${referral_id}`, requestOptions);
+      const response = await fetch(`${process.env.BACKEND_DOMAIN}/referral/link-clicked?referral_id=${referral_id}`, requestOptions);
   
       if (response.status === 201) {
         cookies().set({
