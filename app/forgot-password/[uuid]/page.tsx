@@ -35,7 +35,7 @@ export default function ChangePassword({ params }: {
 
   useEffect(() => {
     if (state.message === 'success') {
-      push('http://localhost:3001/login');
+      push(`${process.env.NEXT_PUBLIC_WEBAPP_DOMAIN}/login`);
     } else if (state.message !== '') {
       throw new Error(state.message);
     }
