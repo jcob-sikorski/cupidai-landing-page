@@ -101,7 +101,7 @@ export async function onLogIn(prevState: FormState, data: FormData): Promise<{ m
     if (response.status === 200) {
       // Successfully logged in
       const jwt = responseData.access_token;
-      cookies().set("cupidai-session", jwt);
+      cookies().set("cupidai-session", jwt, { secure: true });
     } else if (response.status === 401 || response.status === 404) {
       // User already exists
       throw new Error(responseData.detail);
