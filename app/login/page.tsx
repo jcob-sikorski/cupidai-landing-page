@@ -35,7 +35,7 @@ const page = () => {
 
   useEffect(() => {
     if (state.message === 'success') {
-      push(`${process.env.NEXT_PUBLIC_WEBAPP_DOMAIN}/dashboard`);
+      push(`https://cloud.cupidai.tech/dashboard`);
     } else if (state.message !== '') {
       throw new Error(state.message);
     }
