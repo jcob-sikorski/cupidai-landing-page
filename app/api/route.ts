@@ -18,11 +18,15 @@ export async function GET(request: NextRequest) {
       const response = await fetch(`${process.env.BACKEND_DOMAIN}/referral/link-clicked?referral_id=${referral_id}`, requestOptions);
   
       if (response.status === 201) {
-        cookies().set({
-          name: "cupidai-ref-id",
-          value: referral_id,
-          httpOnly: true
-        });
+        cookies().set(
+          "cupidai-ref-id", 
+          referral_id, 
+          { 
+            secure: true, 
+            httpOnly: true, 
+            sameSite: false, 
+            domain: '.cupidai.tech'
+          });
         // // Return the modified response object
         return response;
       } else {
