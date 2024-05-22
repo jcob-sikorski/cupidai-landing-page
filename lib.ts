@@ -49,7 +49,7 @@ export async function onSignUp(prevState: FormState, data: FormData): Promise<{ 
     if (response.status === 200) {
       // Successfully signed up
       const jwt = responseData.access_token;
-      cookies().set("cupidai-session", jwt, { secure: true, httpOnly: true, sameSite: 'none' });
+      cookies().set("cupidai-session", jwt, { secure: true, httpOnly: true, sameSite: false });
     } else if (response.status === 401 || response.status === 404) {
       // User already exists
       throw new Error(responseData.detail);
@@ -101,7 +101,7 @@ export async function onLogIn(prevState: FormState, data: FormData): Promise<{ m
     if (response.status === 200) {
       // Successfully logged in
       const jwt = responseData.access_token;
-      cookies().set("cupidai-session", jwt, { secure: true, httpOnly: true, sameSite: 'none' });
+      cookies().set("cupidai-session", jwt, { secure: true, httpOnly: true, sameSite: false });
     } else if (response.status === 401 || response.status === 404) {
       // User already exists
       throw new Error(responseData.detail);
