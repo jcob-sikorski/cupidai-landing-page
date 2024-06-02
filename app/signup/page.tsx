@@ -35,7 +35,7 @@ const page = () => {
   const [showConfirmPassword, setShowConfirmPassword] = useState<boolean>(false);
 
   const checkInputs = () => {
-    return password.length >= 8 && confirmPass === password && email.length >= 0 && username.length >= 0;
+    return password.length >= 5 && confirmPass === password && email.length >= 0 && username.length >= 0;
   }
 
   useEffect(() => {
@@ -272,7 +272,7 @@ const page = () => {
                 onChange={(value) => setConfirmPass(value)}
                 visible={showConfirmPassword}
                 handleVisible={() => setShowConfirmPassword(!showConfirmPassword)}
-                message="Use 8 or more characters with a mix of letters, numbers & symbols"
+                message="Use 5 or more characters."
                 required={true}
               />
             </div>
