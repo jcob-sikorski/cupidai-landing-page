@@ -4,6 +4,7 @@ import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Divider } from "./Divider";
+import Link from "next/link";
 
 const Footer = () => {
   return (
@@ -39,71 +40,28 @@ const Footer = () => {
       <div className="flex items-center justify-center sm:justify-between gap-4 flex-wrap w-full max-w-[1920px]">
         <p className="text-center">©CUPID AI 2023. All rights reserved</p>
         <div className="flex gap-6">
-          <div className="group w-10 h-10 rounded-full flex items-center justify-center p-2 bg-dgray hover:bg-white transition-all duration-300 ease-in-out cursor-pointer">
-            <>
-              <svg
-                className="fill-white group-hover:fill-dgray transition-all duration-300 ease-in-out"
-                width="18"
-                height="18"
-                viewBox="0 0 18 18"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <g clipPath="url(#clip0_72_8981)">
-                  <path
-                    d="M17.5714 3.69587C16.9286 3.96373 16.2857 4.17801 15.5357 4.23158C16.2857 3.80301 16.8214 3.10658 17.0893 2.30301C16.3929 2.73158 15.6429 2.99944 14.8393 3.16016C14.1964 2.46373 13.2857 2.03516 12.3214 2.03516C10.3929 2.03516 8.78572 3.58873 8.78572 5.57087C8.78572 5.83873 8.83929 6.10659 8.89286 6.37444C5.94643 6.21373 3.375 4.82087 1.60714 2.67801C1.28571 3.21373 1.125 3.80301 1.125 4.44587C1.125 5.67801 1.76786 6.74944 2.67857 7.3923C2.08929 7.3923 1.55357 7.23158 1.07143 6.96373V7.0173C1.07143 8.73158 2.30357 10.1244 3.91071 10.4459C3.58929 10.4994 3.32143 10.553 3 10.553C2.78571 10.553 2.57143 10.553 2.35714 10.4994C2.78571 11.8923 4.125 12.9102 5.625 12.9637C4.44643 13.928 2.89286 14.4637 1.23214 14.4637C0.964286 14.4637 0.642857 14.4637 0.375 14.4102C1.98214 15.3744 3.85714 15.9637 5.83929 15.9637C12.3214 15.9637 15.8571 10.6066 15.8571 5.94587C15.8571 5.78516 15.8571 5.62444 15.8571 5.5173C16.5 4.98158 17.0893 4.3923 17.5714 3.69587Z"
-                    fill=""
-                  />
-                </g>
-                <defs>
-                  <clipPath id="clip0_72_8981">
-                    <rect
-                      width="17.1429"
-                      height="17.1429"
-                      fill="white"
-                      transform="translate(0.427734 0.427734)"
-                    />
-                  </clipPath>
-                </defs>
-              </svg>
-            </>
-          </div>
 
-          <div className="group w-10 h-10 rounded-full flex items-center justify-center p-2 bg-dgray hover:bg-white transition-all duration-300 ease-in-out cursor-pointer">
-            <>
-              <svg
-                className="fill-white group-hover:fill-dgray transition-all duration-300 ease-in-out"
-                width="18"
-                height="18"
-                viewBox="0 0 18 18"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <g clipPath="url(#clip0_72_8985)">
-                  <path
-                    d="M8.99749 11.7118C10.4965 11.7118 11.7118 10.4965 11.7118 8.99749C11.7118 7.49843 10.4965 6.2832 8.99749 6.2832C7.49843 6.2832 6.2832 7.49843 6.2832 8.99749C6.2832 10.4965 7.49843 11.7118 8.99749 11.7118Z"
-                    fill=""
-                  />
-                  <path
-                    d="M12.3905 0.855469H5.60479C2.98618 0.855469 0.855469 2.98686 0.855469 5.60615V12.3919C0.855469 15.0105 2.98686 17.1412 5.60615 17.1412H12.3919C15.0105 17.1412 17.1412 15.0098 17.1412 12.3905V5.60479C17.1412 2.98618 15.0098 0.855469 12.3905 0.855469ZM8.99833 13.0698C6.75293 13.0698 4.9269 11.2437 4.9269 8.99833C4.9269 6.75293 6.75293 4.9269 8.99833 4.9269C11.2437 4.9269 13.0698 6.75293 13.0698 8.99833C13.0698 11.2437 11.2437 13.0698 8.99833 13.0698ZM13.7483 4.9269C13.3738 4.9269 13.0698 4.6229 13.0698 4.24833C13.0698 3.87375 13.3738 3.56975 13.7483 3.56975C14.1229 3.56975 14.4269 3.87375 14.4269 4.24833C14.4269 4.6229 14.1229 4.9269 13.7483 4.9269Z"
-                    fill=""
-                  />
-                </g>
-                <defs>
-                  <clipPath id="clip0_72_8985">
-                    <rect
-                      width="17.1429"
-                      height="17.1429"
-                      fill=""
-                      transform="translate(0.427734 0.427734)"
-                    />
-                  </clipPath>
-                </defs>
-              </svg>
-            </>
-          </div>
 
+        <Link href="https://discord.gg/sDp7s7JXH6" passHref>
           <div className="group w-10 h-10 rounded-full flex items-center justify-center p-2 bg-dgray hover:bg-white transition-all duration-300 ease-in-out cursor-pointer">
+            <svg
+              className="fill-white group-hover:fill-dgray transition-all duration-300 ease-in-out"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M20.317 4.369a19.791 19.791 0 00-4.885-1.515.07.07 0 00-.074.035 13.751 13.751 0 00-.601 1.243 18.835 18.835 0 00-5.632 0 13.668 13.668 0 00-.602-1.243.07.07 0 00-.074-.035c-1.731.317-3.394.829-4.885 1.515a.063.063 0 00-.029.025C.533 9.39-.319 14.322.099 19.201a.076.076 0 00.027.053c2.052 1.507 4.035 2.422 5.992 3.029a.071.071 0 00.078-.027 13.575 13.575 0 001.116-1.805.07.07 0 00-.041-.099 11.785 11.785 0 01-1.696-.8.07.07 0 01-.007-.118c.114-.086.229-.178.337-.272a.07.07 0 01.073-.01c3.565 1.627 7.418 1.627 10.938 0a.07.07 0 01.075.009c.108.094.223.186.337.272a.07.07 0 01-.006.118 11.443 11.443 0 01-1.697.799.07.07 0 00-.04.1c.342.64.725 1.268 1.116 1.804a.07.07 0 00.078.028c1.957-.607 3.94-1.522 5.992-3.029a.077.077 0 00.027-.053c.5-5.119-.838-10.014-4.305-14.807a.061.061 0 00-.03-.025zM8.02 15.331c-1.182 0-2.156-1.085-2.156-2.419 0-1.333.95-2.418 2.157-2.418 1.207 0 2.174 1.085 2.156 2.418 0 1.334-.95 2.419-2.156 2.419zm7.958 0c-1.182 0-2.156-1.085-2.156-2.419 0-1.333.95-2.418 2.156-2.418 1.207 0 2.174 1.085 2.156 2.418 0 1.334-.95 2.419-2.156 2.419z"
+                fill="currentColor"
+              />
+            </svg>
+          </div>
+        </Link>
+
+
+          {/* <div className="group w-10 h-10 rounded-full flex items-center justify-center p-2 bg-dgray hover:bg-white transition-all duration-300 ease-in-out cursor-pointer">
             <>
               <svg
                 className="fill-white group-hover:fill-dgray transition-all duration-300 ease-in-out"
@@ -131,9 +89,9 @@ const Footer = () => {
                 </defs>
               </svg>
             </>
-          </div>
+          </div> */}
 
-          <div className="group w-10 h-10 rounded-full flex items-center justify-center p-2 bg-dgray hover:bg-white transition-all duration-300 ease-in-out cursor-pointer">
+          {/* <div className="group w-10 h-10 rounded-full flex items-center justify-center p-2 bg-dgray hover:bg-white transition-all duration-300 ease-in-out cursor-pointer">
             <>
               <svg
                 className="fill-white group-hover:fill-dgray transition-all duration-300 ease-in-out"
@@ -161,7 +119,7 @@ const Footer = () => {
                 </defs>
               </svg>
             </>
-          </div>
+          </div> */}
         </div>
       </div>
 
