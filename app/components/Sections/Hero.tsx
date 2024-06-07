@@ -17,9 +17,6 @@ const Hero = () => {
   const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.8]);
   const scaleImage = useTransform(scrollYProgress, [0, 1], [1, 1.2]);
   const imageOpacity = useTransform(scrollYProgress, [0.5, 1], [1, 0]);
-  const position = useTransform(scrollYProgress, (pos) => {
-    return pos > 0.5 ? "relative" : "fixed";
-  });
 
   return (
     <>
@@ -55,7 +52,6 @@ const Hero = () => {
               height={960}
               alt="Hero Image"
               src="/appScreens/content-deepfakes.png"
-              style={{ position }}
             />
           </motion.div>
         </motion.div>
