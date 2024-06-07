@@ -2,11 +2,31 @@
 
 import React, { useRef } from "react";
 import Image from "next/image";
-import { easeInOut, motion, useScroll, useTransform } from "framer-motion";
-import ImageContainer from "../ImageContainer";
-import { PrimaryBoxButton } from "../Buttons";
+import { motion, useScroll } from "framer-motion";
 
-const About = () => {
+interface Props {
+  text1: string;
+  text2: string;
+  text3: string;
+  text4: string;
+  text5: string;
+  text6: string;
+  text7: string;
+  text8: string;
+  imgSrc: string;
+}
+
+export const Features = ({ 
+  text1,
+  text2,
+  text3,
+  text4,
+  text5,
+  text6,
+  text7,
+  text8,
+  imgSrc
+}: Props) => {
   const target = useRef<HTMLDivElement | null>(null);
   const { scrollYProgress } = useScroll({
     target: target,
@@ -22,10 +42,9 @@ const About = () => {
     >
       <div className="w-full">
         <div className="flex flex-col gap-4 w-full sm:w-1/2 md:w-1/3">
-          <h2>A studio created to be your own.</h2>
+          <h2>{text1}</h2>
           <p className="text-textd">
-            Create anything and everything to ensure it fits your business, not
-            the other way around.
+            {text2}
           </p>
         </div>
       </div>
@@ -65,12 +84,11 @@ const About = () => {
                 />
               </svg>
               <h4 className="text-[#57606A] group-hover:text-white transition-all duration-300 delay-100 ease-in-out">
-                Hyper Realistic AI Content
+               {text3}
               </h4>
             </div>
             <span className="caption text-[#57606A] group-hover:text-[#99A2AF] transition-all duration-300 delay-150 ease-in-out">
-              Advanced generation techniques helps us generate the best AI
-              generation within the industry
+             {text4}
             </span>
           </div>
 
@@ -107,12 +125,11 @@ const About = () => {
                 />
               </svg>
               <h4 className="text-[#57606A] group-hover:text-white transition-all duration-300 delay-100 ease-in-out">
-                Streamlined Workflow
+               {text5}
               </h4>
             </div>
             <span className="caption text-[#57606A] group-hover:text-[#99A2AF] transition-all duration-300 delay-150 ease-in-out">
-              Enjoy a seamless and swift workflow pipeline with CUPID AI,
-              simplifying your content creation and management processes.
+             {text6}
             </span>
           </div>
 
@@ -149,12 +166,11 @@ const About = () => {
                 />
               </svg>
               <h4 className="text-[#57606A] group-hover:text-white transition-all duration-300 delay-100 ease-in-out">
-                Universal verification
+               {text7}
               </h4>
             </div>
             <span className="caption text-[#57606A] group-hover:text-[#99A2AF] transition-all duration-300 delay-150 ease-in-out">
-              Verify your model anywhere, anytime with our AI content generation
-              methods.
+             {text8}
             </span>
           </div>
         </div>
@@ -163,29 +179,12 @@ const About = () => {
             width={1920}
             height={1915}
             alt=""
-            src="/appScreens/about.png"
+            src={imgSrc}
           />
         </motion.div>
-      </div>
-
-      <div className="flex flex-col gap-6 items-center justify-center max-w-[800px] text-center py-12">
-        <motion.div className="w-16 h-16">
-          <ImageContainer src="/user/user.png" />
-        </motion.div>
-        <div className="flex flex-col items-center justify-center gap-2">
-          <motion.h3>
-            “My team loves CUPID AI’s system because it’s so dynamic. We can
-            create content in so many different ways and combinations.”
-          </motion.h3>
-          <motion.p className="text-textd">Davio White</motion.p>
-          <motion.span className="caption text-textd">
-            Chief of Staff, Pallet
-          </motion.span>
-        </div>
-        <PrimaryBoxButton href="/signup" enabled={true} form={false}>Try now</PrimaryBoxButton>
       </div>
     </motion.section>
   );
 };
 
-export default About;
+export default Features;

@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import React, { useState } from "react";
 import Image from "next/image";
-import { PrimaryBoxButton, SecondaryBoxButton } from "../Buttons";
+import { PrimaryButton, PrimaryBoxButton, SecondaryButton, SecondaryBoxButton } from "../Buttons";
 
 const Pricing = () => {
   const [timeFrame, setTimeFrame] = useState("Yearly");
@@ -95,10 +95,10 @@ const Pricing = () => {
             <div className="flex flex-col gap-4">
               <h3>Individual</h3>
               <p className="text-textd">
-                Everything you need to supercharge your efficiency
+                Everything you need to supercharge your efficiency.
               </p>
               <div className="flex items-end">
-                <h2>£25</h2>
+                <h2>£24.99</h2>
                 <span className="caption text-textd">/ month</span>
               </div>
             </div>
@@ -238,7 +238,7 @@ const Pricing = () => {
                 Unlock a new level of your personal productivity.
               </span>
               <div className="flex items-end gap-2">
-                <h2>£80</h2>
+                <h2>£74.99</h2>
                 <span className="caption text-textd">/ month</span>
                 <div className="flex px-2 py-1 rounded-full bg-[#FF6363]">
                   <span className="text-sm text-dgray font-bold">-20%</span>
@@ -247,9 +247,9 @@ const Pricing = () => {
             </div>
 
             <div className="relative flex flex-col gap-4 items-center justify-center">
-              <div className="absolute flex text-center py-1 px-4 rounded-[12px] bg-lgray w-fit">
+              {/* <div className="absolute flex text-center py-1 px-4 rounded-[12px] bg-lgray w-fit">
                 <span className="caption">£408 billed annually</span>
-              </div>
+              </div> */}
               <svg
                 className="w-full"
                 width="403"
@@ -323,7 +323,7 @@ const Pricing = () => {
                 <span className="caption text-textd">Controlnet Features</span>
               </div>
 
-              <div className="flex gap-2">
+              {/* <div className="flex gap-2">
                 <>
                   <Image
                     width={24}
@@ -336,7 +336,7 @@ const Pricing = () => {
                 <div className="flex px-3 py-1 rounded-full items-center justify-center bg-white bg-opacity-10 text-[11px] text-text">
                   COMING SOON
                 </div>
-              </div>
+              </div> */}
 
               <div className="flex gap-2">
                 <>
@@ -381,10 +381,10 @@ const Pricing = () => {
             <div className="flex flex-col gap-4">
               <h3>Business</h3>
               <span className="caption text-textd">
-                Supercharge your team and maximize profits
+                Supercharge your team and maximize profits.
               </span>
               <div className="flex items-end gap-2">
-                <h2>£375</h2>
+                <h2>£599.9</h2>
                 <div className="flex flex-col">
                   <span className="caption text-textd">/ month</span>
                   <span className="caption text-textd">/ user</span>
@@ -397,9 +397,9 @@ const Pricing = () => {
             </div>
 
             <div className="relative flex flex-col gap-4 items-center justify-center">
-              <div className="absolute flex text-center py-1 px-4 rounded-[12px] bg-lgray w-fit">
+              {/* <div className="absolute flex text-center py-1 px-4 rounded-[12px] bg-lgray w-fit">
                 <span className="caption">£1800 billed annually</span>
-              </div>
+              </div> */}
               <svg
                 className="w-full"
                 width="403"
@@ -574,13 +574,17 @@ const Pricing = () => {
       </div>
 
       <div className=" group flex items-center justfiy-center bg-white bg-opacity-10 hover:bg-opacity-100 cursor-pointer rounded-full w-fit py-2 px-4 gap-2 transition-all duration-300 ease-in-out">
-        <span className="text-sm text-textd group-hover:text-dgray transition-all duration-300 ease-in-out">
+        {/* <span className="text-sm text-textd group-hover:text-dgray transition-all duration-300 ease-in-out">
           Want enterprise features?
-        </span>
-        <span className="text-sm font-bold group-hover:text-dgray transition-all duration-300 ease-in-out">
+        </span> */}
+        <div className="flex gap-4">
+          <PrimaryButton href="/signup">Try Now</PrimaryButton>
+          <SecondaryButton href="https://discord.gg/sDp7s7JXH6">Request a Demo</SecondaryButton>
+        </div>
+        {/* <span className="text-sm font-bold group-hover:text-dgray transition-all duration-300 ease-in-out">
           Tell us more
-        </span>
-        <>
+        </span> */}
+        {/* <>
           <svg
             className="stroke-white group-hover:stroke-dgray transition-all duration-300 ease-in-out"
             width="17"
@@ -597,7 +601,7 @@ const Pricing = () => {
               strokeLinejoin="round"
             />
           </svg>
-        </>
+        </> */}
       </div>
     </motion.section>
   );

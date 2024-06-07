@@ -19,10 +19,6 @@ const Services = () => {
 
       <div className="z-10 flex flex-col items-center justify-center gap-2 text-center max-w-[640px]">
         <h2>Our Services</h2>
-        <p className="text-textd">
-          Tweak anything and everything to ensure fits your business, not the
-          other way around.
-        </p>
       </div>
 
       <div className="z-20 flex flex-col gap-4 w-full max-w-[1280px]">
@@ -45,9 +41,7 @@ const Services = () => {
             </div>
             <h3>Content Deepfakes</h3>
             <p>
-              Seize control and elevate your business with our hyper-realistic
-              AI content creation. Immerse in a blend of artistry and technology
-              that promises unparalleled authenticity.
+              Create hyper-realistic images and videos with our deepfake feature. Gain full control over your content and elevate your business with unmatched authenticity.
             </p>
           </motion.div>
 
@@ -127,9 +121,7 @@ const Services = () => {
             </div>
             <h3>Image Generation</h3>
             <p className="text-textd">
-              Transform productivity with our sophisticated automation tools.
-              Let technology work tirelessly behind the scenes, so your
-              creativity never has to pause.
+            Replace hours of work with Photoshop by using our kit of models to generate hyper-realistic photos effortlessly, letting technology work tirelessly so your creativity never has to pause.
             </p>
           </motion.div>
         </div>

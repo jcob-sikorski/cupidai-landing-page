@@ -14,16 +14,13 @@ interface Props {
   form?: boolean;
 }
 
-export const PrimaryButton = ({ 
-  children, 
-  onClick, 
-  href
-}: Props) => {
+export const PrimaryButton = ({ children, onClick, href }: Props) => {
   const [mouseEnter, setMouseEnter] = useState(false);
 
   const handleMouseEnter = () => {
     setMouseEnter(!mouseEnter);
   };
+
   return (
     <Link href={href ? href : ""}>
       <motion.div
@@ -41,22 +38,20 @@ export const PrimaryButton = ({
             "linear-gradient(238.05deg, #7F04E3 4.82%, #FF006B 116.43%)",
         }}
         whileHover={{
+          scale: 1.1, // Increase size when hovered
           background: [
-            null,
             "linear-gradient(238deg, #7F04E3 4.82%, #FF006B 116.43%)",
-            "linear-gradient(90deg, #7F04E3 4.82%, #FF006B 116.43%)",
-            "linear-gradient(175deg, #7F04E3 4.82%, #FF006B 116.43%)",
-            "linear-gradient(15deg, #7F04E3 4.82%, #FF006B 116.43%)",
+            "linear-gradient(90deg, #8B14E3 15.82%, #FF206B 126.43%)",
+            "linear-gradient(175deg, #7F34E3 26.82%, #FF406B 136.43%)",
+            "linear-gradient(15deg, #7F64E3 37.82%, #FF606B 146.43%)",
             "linear-gradient(238deg, #7F04E3 4.82%, #FF006B 116.43%)",
           ],
         }}
         transition={{
-          duration: 3,
+          duration: 0.4, // Adjusted duration for a smoother hover effect
           ease: "easeInOut",
-          times: [0, 0.01, 0.5, 0.8, 1],
-          repeat: Infinity,
         }}
-        className={`text-text text-sm font-bold`}
+        className={`text-white text-sm font-bold`}
       >
         {children}
       </motion.div>
@@ -64,12 +59,13 @@ export const PrimaryButton = ({
   );
 };
 
+
 export const PrimaryBoxButton = ({ 
   children, 
   onClick, 
   href,
-  enabled=true,
-  form=true
+  enabled = true,
+  form = true
 }: Props) => {
   const [mouseEnter, setMouseEnter] = useState(false);
 
@@ -105,6 +101,7 @@ export const PrimaryBoxButton = ({
           opacity: opacity, // Set opacity based on enabled prop
         }}
         whileHover={{
+          scale: 1.1, // Increase size when hovered
           background: [
             null,
             "linear-gradient(238deg, #7F04E3 4.82%, #FF006B 116.43%)",
@@ -115,18 +112,16 @@ export const PrimaryBoxButton = ({
           ],
         }}
         transition={{
-          duration: 3,
+          duration: 0.2, // Adjusted duration for a smoother hover effect
           ease: "easeInOut",
-          times: [0, 0.01, 0.5, 0.8, 1],
-          repeat: Infinity,
         }}
         className={`text-text text-sm font-bold`}
       >
         {children}
       </motion.button>
     ) : (
-      <Link href={href ? href : ""}>
-        <motion.div
+      <Link href={href ? href : ""} passHref>
+        <motion.a
           onClick={handleClick}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseEnter}
@@ -142,6 +137,7 @@ export const PrimaryBoxButton = ({
             opacity: opacity, // Set opacity based on enabled prop
           }}
           whileHover={{
+            scale: 1.1, // Increase size when hovered
             background: [
               null,
               "linear-gradient(238deg, #7F04E3 4.82%, #FF006B 116.43%)",
@@ -152,19 +148,18 @@ export const PrimaryBoxButton = ({
             ],
           }}
           transition={{
-            duration: 3,
+            duration: 0.2, // Adjusted duration for a smoother hover effect
             ease: "easeInOut",
-            times: [0, 0.01, 0.5, 0.8, 1],
-            repeat: Infinity,
           }}
           className={`text-text text-sm font-bold`}
         >
           {children}
-        </motion.div>
+        </motion.a>
       </Link>
     )
   );
 };
+
 
 export const SecondaryButton = ({ children, onClick, href }: Props) => {
   return (
@@ -181,9 +176,11 @@ export const SecondaryButton = ({ children, onClick, href }: Props) => {
           background: "#0F0F0F",
         }}
         whileHover={{
+          scale: 1.1, // Increase size when hovered
           background: "#171717",
         }}
         transition={{
+          duration: 0.2, // Adjusted duration for a smoother hover effect
           ease: "easeInOut",
         }}
         className="text-text text-sm font-bold"
@@ -194,52 +191,120 @@ export const SecondaryButton = ({ children, onClick, href }: Props) => {
   );
 };
 
+
 export const SecondaryBoxButton = ({ children, onClick, href }: Props) => {
   return (
     <Link href={href ? href : ""}>
-      <div
+      <motion.div
         onClick={onClick}
-        className="flex items-center justify-center w-full text-sm font-bold px-8 py-2 rounded-[8px] border-[1px] bg-white bg-opacity-0 border-white border-opacity-20 cursor-pointer hover:bg-opacity-100 hover:text-dgray transition-all duration-300 ease-in-out"
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          padding: "8px 24px",
+          borderRadius: "8px",
+          cursor: "pointer",
+          background: "white",
+          border: "1px solid rgba(255, 255, 255, 0.2)",
+        }}
+        whileHover={{
+          scale: 1.1, // Increase size when hovered
+          background: "rgba(255, 255, 255, 1)",
+        }}
+        transition={{
+          duration: 0.2, // Adjusted duration for a smoother hover effect
+          ease: "easeInOut",
+        }}
+        className="text-sm font-bold"
       >
         {children}
-      </div>
+      </motion.div>
     </Link>
   );
 };
+
 
 export const TertiaryButton = ({ children, onClick, href }: Props) => {
   return (
     <Link href={href ? href : ""}>
-      <p
+      <motion.p
         onClick={onClick}
-        className="text-textd underline cursor-pointer hover:text-white transition-all duration-300 ease-in-out"
+        style={{
+          cursor: "pointer",
+        }}
+        whileHover={{
+          scale: 1.1, // Increase size when hovered
+          color: "white",
+        }}
+        transition={{
+          duration: 0.2, // Adjusted duration for a smoother hover effect
+          ease: "easeInOut",
+        }}
+        className="text-textd underline transition-all duration-300 ease-in-out"
       >
         {children}
-      </p>
+      </motion.p>
     </Link>
   );
 };
+
 
 export const IconButton = ({ children, onClick, href, icon }: Props) => {
   return (
     <Link href={href ? href : ""}>
-      <div
+      <motion.div
         onClick={onClick}
-        className="flex gap-4 items-center justify-center w-full text-sm font-bold px-8 py-2 rounded-[8px] border-[1px] bg-white bg-opacity-0 border-white border-opacity-20 cursor-pointer hover:bg-opacity-100 hover:text-dgray transition-all duration-300 ease-in-out"
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          padding: "8px 24px",
+          borderRadius: "8px",
+          cursor: "pointer",
+          background: "white",
+          border: "1px solid rgba(255, 255, 255, 0.2)",
+        }}
+        whileHover={{
+          scale: 1.1, // Increase size when hovered
+          background: "rgba(255, 255, 255, 1)",
+        }}
+        transition={{
+          duration: 0.2, // Adjusted duration for a smoother hover effect
+          ease: "easeInOut",
+        }}
+        className="flex gap-4 items-center justify-center w-full text-sm font-bold transition-all duration-300 ease-in-out"
       >
         {icon && <Image width={20} height={20} src={icon} alt="" />}
         {children}
-      </div>
+      </motion.div>
     </Link>
   );
 };
 
+
 export const CloseButton = ({ onClick, href }: Props) => {
   return (
     <Link href={href ? href : ""}>
-      <div
+      <motion.div
         onClick={onClick}
-        className="flex items-center justify-center p-3 3xl:p-4 rounded-full bg-dgray hover:bg-gray cursor-pointer transition-all duration-300 ease-in-out"
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          padding: "12px",
+          borderRadius: "50%",
+          cursor: "pointer",
+          background: "#dgray",
+        }}
+        whileHover={{
+          scale: 1.1, // Increase size when hovered
+          background: "#gray",
+        }}
+        transition={{
+          duration: 0.2, // Adjusted duration for a smoother hover effect
+          ease: "easeInOut",
+        }}
+        className="transition-all duration-300 ease-in-out"
       >
         <svg
           width="11"
@@ -253,7 +318,8 @@ export const CloseButton = ({ onClick, href }: Props) => {
             fill="white"
           />
         </svg>
-      </div>
+      </motion.div>
     </Link>
   );
 };
+

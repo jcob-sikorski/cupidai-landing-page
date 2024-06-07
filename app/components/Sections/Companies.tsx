@@ -21,7 +21,7 @@ const Companies = () => {
       // ref={target}
       className="w-full flex flex-col gap-4 px-4 py-4 sm:px-6 md:px-12 lg:px-28 lg:pt-48 lg:pb-28 max-w-[1920px] items-center justify-center mt-[512px] mb-[128px]"
     >
-      <motion.p>Trusted by 2,000+ companies</motion.p>
+      <motion.p>Trusted by 200+ agency owners</motion.p>
       <div className="grid grid-cols-3 md:grid-cols-5 gap-12 items-center opacity-60">
         <motion.div>
           <Image width={200} height={48} alt="" src="/companies/logo.svg" />
