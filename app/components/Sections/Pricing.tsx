@@ -384,7 +384,7 @@ const Pricing = () => {
                 Supercharge your team and maximize profits.
               </span>
               <div className="flex items-end gap-2">
-                <h2>£599.9</h2>
+                <h2>£374.99</h2>
                 <div className="flex flex-col">
                   <span className="caption text-textd">/ month</span>
                   <span className="caption text-textd">/ user</span>
