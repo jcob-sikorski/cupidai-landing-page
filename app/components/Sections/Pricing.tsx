@@ -350,6 +350,9 @@ const Pricing = () => {
                 <span className="caption text-textd">
                   IPA refinement Features
                 </span>
+                <div className="flex px-3 py-1 rounded-full items-center justify-center bg-white bg-opacity-10 text-[11px] text-text">
+                  COMING SOON
+                </div>
               </div>
 
               <div className="flex gap-2">
@@ -362,6 +365,9 @@ const Pricing = () => {
                   />
                 </>
                 <span className="caption text-textd">Special Discounts</span>
+                <div className="flex px-3 py-1 rounded-full items-center justify-center bg-white bg-opacity-10 text-[11px] text-text">
+                  COMING SOON
+                </div>
               </div>
             </div>
           </div>
@@ -478,6 +484,9 @@ const Pricing = () => {
                   </svg>
                 </>
                 <span className="caption text-textd">Team Max Capacity</span>
+                <div className="flex px-3 py-1 rounded-full items-center justify-center bg-white bg-opacity-10 text-[11px] text-text">
+                  COMING SOON
+                </div>
               </div>
 
               <div className="flex gap-2">
